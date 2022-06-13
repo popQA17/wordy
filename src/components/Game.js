@@ -52,7 +52,6 @@ const WordRow = (props) =>{
         }
       }
       if(props.userAnswer.toLowerCase() == props.answer.toLowerCase()){
-        props.addScore()
         socket.emit('clientEvent', 'setWord', {room: props.roomID, word: props.answer})
       }
       setAnswer(finalanswer)
@@ -113,6 +112,7 @@ export const Game = (props) => {
   const [score, setscore] = useState(0)
   const [wordNumber, setWordNumber] = useState(0)
   const [transitionWord, setransitionWord] = useState(false)
+  const [topScores, setTopScores] = useState([])
   const words = props.words
   console.log(words)
   const [word, setword] = useState('')
