@@ -24,6 +24,12 @@ function App() {
       setIsDisconnect(false)
     })
   }, [])
+  useEffect(()=>{
+    if (localStorage.getItem('chakra-ui-color-mode') == 'light' | localStorage.getItem('chakra-ui-color-mode')== null){
+      localStorage.setItem('chakra-ui-color-mode', 'dark')
+      window.location.reload()
+    }
+  }, [])
   return (
     <ChakraProvider>
         <link href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet"/>
