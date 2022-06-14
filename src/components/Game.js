@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {socket} from "../service/socket";
 import Typist from 'react-typist';
 import $ from 'jquery'
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 
 const WordRow = (props) =>{
@@ -59,33 +59,43 @@ const WordRow = (props) =>{
     }
   }, [props.userAnswer])
   return(
-    <>
+    <AnimatePresence>
       {answer.length != 0 ? 
       <>
         <Box bg='gray.700' rounded={'md'} width={'50px'} height='50px'>
+        <motion.div transition={{delay: 0.1}} initial={{opacity: 0}} animate={{opacity: 1}} key='letter1'>
           <Box display={'flex'} justifyContent='center' alignItems={'center'} bg={`${answer[0].status == 'correct' ? 'green.500' : answer[0].status == 'partial'? 'yellow.500' : answer[0].status == 'wrong' ? 'gray.700': 'gray.700'}`} rounded={'md'} width={'50px'} height='50px'>
           <Heading textTransform={'uppercase'} fontSize={'40px'}>{answer[0].letter}</Heading>
           </Box>
+        </motion.div>
         </Box>
         <Box display={'flex'} justifyContent='center' alignItems={'center'} bg='gray.700' rounded={'md'} width={'50px'} height='50px'>
+        <motion.div transition={{delay: 0.2}} initial={{opacity: 0}} animate={{opacity: 1}} key='letter2'>
           <Box display={'flex'} justifyContent='center' alignItems={'center'} bg={`${answer[1].status == 'correct' ? 'green.500' : answer[1].status == 'partial'? 'yellow.500' : answer[0].status == 'wrong' ? 'gray.700': 'gray.700'}`} rounded={'md'} width={'50px'} height='50px'>
           <Heading textTransform={'uppercase'} fontSize={'40px'}>{answer[1].letter}</Heading>
           </Box>
+        </motion.div>
         </Box>
         <Box display={'flex'} justifyContent='center' alignItems={'center'} bg='gray.700' rounded={'md'} width={'50px'} height='50px'>
+        <motion.div transition={{delay: 0.3}} initial={{opacity: 0}} animate={{opacity: 1}} key='letter3'>
           <Box display={'flex'} justifyContent='center' alignItems={'center'} bg={`${answer[2].status == 'correct' ? 'green.500' : answer[2].status == 'partial'? 'yellow.500' : answer[0].status == 'wrong' ? 'gray.700': 'gray.700'}`} rounded={'md'} width={'50px'} height='50px'>
           <Heading textTransform={'uppercase'} fontSize={'40px'}>{answer[2].letter}</Heading>
           </Box>
+        </motion.div>
         </Box>
         <Box display={'flex'} justifyContent='center' alignItems={'center'} bg='gray.700' rounded={'md'} width={'50px'} height='50px'>
+        <motion.div transition={{delay: 0.4}} initial={{opacity: 0}} animate={{opacity: 1}} key='letter4'>
           <Box display={'flex'} justifyContent='center' alignItems={'center'} bg={`${answer[3].status == 'correct' ? 'green.500' : answer[3].status == 'partial'? 'yellow.500' : answer[0].status == 'wrong' ? 'gray.700': 'gray.700'}`} rounded={'md'} width={'50px'} height='50px'>
           <Heading textTransform={'uppercase'} fontSize={'40px'}>{answer[3].letter}</Heading>
           </Box>
+        </motion.div>
         </Box>
         <Box bg='gray.700' rounded={'md'} width={'50px'} height='50px'>
+        <motion.div transition={{delay: 0.5}} initial={{opacity: 0}} animate={{opacity: 1}} key='letter5'>
           <Box display={'flex'} justifyContent='center' alignItems={'center'} bg={`${answer[4].status == 'correct' ? 'green.500' : answer[4].status == 'partial'? 'yellow.500' : answer[0].status == 'wrong' ? 'gray.700': 'gray.700'}`} rounded={'md'} width={'50px'} height='50px'>
           <Heading textTransform={'uppercase'} fontSize={'40px'}>{answer[4].letter}</Heading>
           </Box>
+        </motion.div>
         </Box>
       </>
       :
@@ -97,7 +107,7 @@ const WordRow = (props) =>{
         <Box bg='gray.700' rounded={'md'} width={'50px'} height='50px'></Box>
       </>
     }
-    </>
+    </AnimatePresence>
   )
 }
 
@@ -166,38 +176,54 @@ export const Game = (props) => {
   }, [transitionWord])
   return (
     <>
+    <motion.div transition={{type: 'linear'}} initial={{y: -100, opacity: 0}} animate={{y: 0, opacity: 1}}>
       <HStack bg='gray.700' position={'fixed'} w={'100%'} px={'4'} py={'1'} spacing={'5px'}>
         <Text fontWeight={700}>ID: {props.roomID}</Text>
         <Spacer/>
         {props.owner ? 
         <>
           <Tooltip label="Open chat">
-            <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-comment-dots"/></Button>
+            <motion.div transition={{delay: 1.6}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-comment-dots"/></Button>
+            </motion.div>
           </Tooltip>
           <Tooltip label="Manage participants">
-            <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}  onClick={onPopen}><i className="far fa-users"/></Button>
+            <motion.div transition={{delay: 1.7}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}  onClick={onPopen}><i className="far fa-users"/></Button>
+            </motion.div>
           </Tooltip>
           <Tooltip label="Configure game">
-            <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-cog"/></Button>
+            <motion.div transition={{delay: 1.8}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-cog"/></Button>
+            </motion.div>
           </Tooltip>
           <Tooltip label="Leave game">
-            <Button variant={'ghost'} rounded={'100%'} colorScheme={'red'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-sign-out"/></Button>
+            <motion.div transition={{delay: 1.9}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} colorScheme={'red'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-sign-out"/></Button>
+            </motion.div>
           </Tooltip>
         </>
         :
         <>
           <Tooltip label="Open chat">
-            <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-comment-dots"/></Button>
+            <motion.div transition={{delay: 0.6}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-comment-dots"/></Button>
+            </motion.div>
           </Tooltip>
           <Tooltip label="View participants">
+          <motion.div transition={{delay: 0.7}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
             <Button variant={'ghost'} rounded={'100%'} fontSize={'20px'} height={'50px'} width={'50px'} onClick={onPopen}><i className="far fa-users"/></Button>
+          </motion.div>
           </Tooltip>
           <Tooltip label="Leave game">
-            <Button variant={'ghost'} rounded={'100%'} colorScheme={'red'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-sign-out"/></Button>
+            <motion.div transition={{delay: 0.8}} initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1}}>
+              <Button variant={'ghost'} rounded={'100%'} colorScheme={'red'} fontSize={'20px'} height={'50px'} width={'50px'}><i className="far fa-sign-out"/></Button>
+            </motion.div>
           </Tooltip>
         </>
         }
       </HStack>
+      </motion.div>
       <Modal isOpen={isPopen} onClose={onPclose}>
         <ModalOverlay />
         <ModalContent>
@@ -215,7 +241,7 @@ export const Game = (props) => {
                     var filtered = participants.filter(function(value, index, arr){ 
                         return value.socket != participant.socket;
                     });
-                    setParticipants(filtered)
+                    setParticipants([...filtered])
 
                   }}><i className="far fa-user-slash"/></Button>
                 </Tooltip>
@@ -230,9 +256,11 @@ export const Game = (props) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <AnimatePresence>
       {isStart ?
       gamePhase == 0 ?
       (
+      <motion.div transition={{duration: 1}} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
       <Box height={'100vh'} display={'flex'} width={'100vw'} justifyContent={'center'} alignItems='center' flexDir={'column'}>
         {!props.owner ? 
         <Heading>Look up the Host's screen!</Heading>
@@ -260,12 +288,19 @@ export const Game = (props) => {
           </Heading>
           <Typist.Backspace count={10} delay={2000} />
         </Typist>
+        <Box left='0' bottom='0' bg={'gray.900'} textAlign='right' width={'100vw'} p='4' position='fixed'>
+          <Button size='lg' onClick={()=>{
+            socket.emit('clientEvent', 'setGamePhase', {phase: 1, room: props.roomID})
+          }}>Skip</Button>
+        </Box>
         </>
         }
       </Box>
+      </motion.div>
       )
       :
       gamePhase == 1 ? (
+      <motion.div transition={{duration: 1}} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
       <Box height={'100vh'} display={'flex'} width={'100vw'} justifyContent={'center'} alignItems='center' flexDir={'column'}>
         {props.owner ? 
           transitionWord ?
@@ -309,9 +344,11 @@ export const Game = (props) => {
         </HStack>
         }
       </Box>
+      </motion.div>
       )
       : 
       gamePhase == 2 &&
+      <motion.div transition={{duration: 1}} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
       <Box height={'100vh'} display={'flex'} width={'100vw'} justifyContent={'center'} alignItems='center' flexDir={'column'}>
         {!props.owner ? 
         <Heading>Great job!</Heading>
@@ -321,22 +358,26 @@ export const Game = (props) => {
         </>
         }
       </Box>
+      </motion.div>
       :
       <Box height={'100vh'} display={'flex'} width={'100vw'} justifyContent={'center'} alignItems='center' flexDir={'column'}>
         {!props.owner ? 
         <Heading>Waiting for other players..</Heading>
         :
         <>
-        <Heading>Share this code: {props.roomID}!</Heading>
-        <Box bottom='0' bg={'gray.900'} textAlign='right' width={'100vw'} p='4' position='fixed'>
-          <Button colorScheme={'teal'} size='lg' onClick={()=>{
-            socket.emit('clientEvent', 'startGame', {room: props.roomID})
-          }}>Start</Button>
+        <motion.div transition={{duration: 1}} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
+          <Heading>Share this code: {props.roomID}!</Heading>
+          <Box left='0' bottom='0' bg={'gray.900'} textAlign='right' width={'100vw'} p='4' position='fixed'>
+            <Button colorScheme={'teal'} size='lg' onClick={()=>{
+              socket.emit('clientEvent', 'startGame', {room: props.roomID})
+            }}>Start</Button>
+          </Box>
+        </motion.div>
+          </>
+          }
         </Box>
-        </>
-        }
-      </Box>
       }
+      </AnimatePresence>
     </>
   );
 }
